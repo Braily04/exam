@@ -1,0 +1,105 @@
+
+<style>
+  .return-btn-container {
+    position:absolute;
+    top: 10px;
+    right: 10px;
+  }
+    .container {
+      max-width: 600px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    padding: 2rem;
+    }
+    h3 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .invalid-feedbak {
+      font-size: 0.875rem;
+    }
+    button.btn{
+      font-size: 1.125rem;
+    }
+    button.btn-secondary {
+      font-size: 1rem;
+    }
+</style>
+
+<body>
+  <div class="container mt-5 border p-4">
+    <h2 class="text-primary mb-3">User Registration</h2>
+
+    <div class="col-12 d-flex justify-content-end">
+    <button type="button" class="btn btn-secondary" onclick="window.history.back()">
+      Return</button>
+    </div>
+
+    <form [formGroup]="secondForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Name -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name"
+        [ngClass]="{'is-invalid': f['name'].invalid && (f['name'].dirty || f['name'].touched)}" />
+        <div *ngIf="f['name'].invalid && (f['name'].dirty || f['name'].touched)" class="invalid-feedback text-danger">
+          <div *ngIf="f['name'].errors?.['required']">Name is required</div>
+        </div>
+      </div>
+  
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" formControlName="email" />
+        <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="text-danger">
+          <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+          <div *ngIf="f['email'].errors?.['email']">Please enter a valid email</div>
+        </div>
+      </div>
+  
+      <!-- Last Name -->
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="lastName" formControlName="lastName" />
+        <div *ngIf="f['lastName'].invalid && (f['lastName'].dirty || f['lastName'].touched)" class="text-danger">
+          <div *ngIf="f['lastName'].errors?.['required']">Last Name is required</div>
+        </div>
+      </div>
+  
+      <!-- Mobile Number -->
+      <div class="mb-3">
+        <label for="mobileNumber" class="form-label">Mobile Number</label>
+        <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNumber" />
+        <div *ngIf="f['mobileNumber'].invalid && (f['mobileNumber'].dirty || f['mobileNumber'].touched)" class="text-danger">
+          <div *ngIf="f['mobileNumber'].errors?.['required']">Mobile number is required</div>
+          <div *ngIf="f['mobileNumber'].errors?.['pattern']">Mobile number must be 10 digits</div>
+        </div>
+      </div>
+  
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username (Email)</label>
+        <input type="text" class="form-control" id="username" formControlName="username" />
+        <div *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched)" class="text-danger">
+          <div *ngIf="f['username'].errors?.['required']">Username is required</div>
+          <div *ngIf="f['username'].errors?.['email']">Please enter a valid username</div>
+        </div>
+      </div>
+  
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password" />
+        <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)" class="text-danger">
+          <div *ngIf="f['password'].errors?.['required']">Password is required</div>
+          <div *ngIf="f['password'].errors?.['minlength']">Password must be at least 8 characters</div>
+          <div *ngIf="f['password'].errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, and one number</div>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </div>
+</body>
